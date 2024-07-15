@@ -17,4 +17,10 @@ then
 fi
 
 mkdir -p $MOUNT_POINT
-sudo mount -o loop $DISK_IMG $MOUNT_POINT
+TIME_OFFSET=$(date +%:z | awk -F: '{
+    if ($1 > 0)
+        print $1*60+$2
+    else
+        print $1*60-$2
+}')
+sudo mount -t vfat -o loop,time_offset=$TIME_OFFSET $DISK_IMG $MOUNT_POINT
