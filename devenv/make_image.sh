@@ -24,10 +24,10 @@ mkfs.fat -n 'MIKAN OS' -s 2 -f 2 -R 32 -F 32 $DISK_IMG
 
 $DEVENV_DIR/mount_image.sh $DISK_IMG $MOUNT_POINT
 sudo mkdir -p $MOUNT_POINT/EFI/BOOT
-sudo cp $EFI_FILE $MOUNT_POINT/EFI/BOOT/BOOTX64.EFI
+sudo cp --preserve=timestamps $EFI_FILE $MOUNT_POINT/EFI/BOOT/BOOTX64.EFI
 if [ "$ANOTHER_FILE" != "" ]
 then
-    sudo cp $ANOTHER_FILE $MOUNT_POINT/
+    sudo cp --preserve=timestamps $ANOTHER_FILE $MOUNT_POINT/
 fi
 sleep 0.5
 sudo umount $MOUNT_POINT
