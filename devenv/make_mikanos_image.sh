@@ -33,13 +33,13 @@ for APP in $(ls "$MIKANOS_DIR/apps")
 do
   if [ -f $MIKANOS_DIR/apps/$APP/$APP ]
   then
-    sudo cp "$MIKANOS_DIR/apps/$APP/$APP" $MOUNT_POINT/$APPS_DIR
+    sudo cp --preserve=timestamps "$MIKANOS_DIR/apps/$APP/$APP" $MOUNT_POINT/$APPS_DIR
   fi
 done
 
 if [ "$RESOURCE_DIR" != "" ]
 then
-  sudo cp $MIKANOS_DIR/$RESOURCE_DIR/* $MOUNT_POINT/
+  sudo cp --preserve=timestamps $MIKANOS_DIR/$RESOURCE_DIR/* $MOUNT_POINT/
 fi
 
 sleep 0.5
