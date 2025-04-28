@@ -10,7 +10,11 @@ then
     echo "以下のファイルを手動でダウンロードし、$(dirname $BASEDIR)に展開してください。"
     echo "https://github.com/uchan-nos/mikanos-build/releases/download/v2.0/x86_64-elf.tar.gz "
 else
-    export PATH="$DEVENVDIR:$PATH"
+    case ":$PATH:" in
+    *:"$DEVENVDIR":*) ;;
+    *) export PATH="$DEVENVDIR:$PATH" ;;
+    esac
+
     export CPPFLAGS="\
     -I$BASEDIR/include/c++/v1 -I$BASEDIR/include -I$BASEDIR/include/freetype2 \
     -I$EDK2DIR/MdePkg/Include -I$EDK2DIR/MdePkg/Include/X64 \
