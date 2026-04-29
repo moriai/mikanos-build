@@ -44,9 +44,9 @@ lld-7 を使いたい場合は Ubuntu 18.04 か 20.04 をお使いください�
 次に Clang，Nasm といった開発ツールや，EDK IIのセットアップを行います。
 `ansible_provision.yml` に必要なツールが記載されています。
 Ansible を使ってセットアップを行うと楽です。
-
+<!--
 注意）ansible_provision.yml は LLVM7 をデフォルトに設定します。これは Ubuntu の alternatives という仕組みを使い、/usr/bin 以下にリンクを張ることで実現しています。
-
+-->
     $ sudo apt install ansible
     $ cd $HOME/osbook/devenv
     $ ansible-playbook -K -i ansible_inventory ansible_provision.yml
@@ -101,9 +101,7 @@ MikanOS や mikanos-build リポジトリ全体のライセンスとは異なり
 
     $ git clone -b osbook2 https://github.com/moriai/mikanos.git
 
-なお、アップストリーム（オリジナル版）は下記で入手できます。
-
-    $ git clone https://github.com/uchan-nos/mikanos.git
+なお、アップストリーム（オリジナル版）は https://github.com/uchan-nos/mikanos.git から入手できます。
 
 最後の `git clone` によって、カレントディレクトリに mikanos ディレクトリが生成され、そこに MikanOS のソースコードがダウンロードされます。
 
@@ -166,3 +164,12 @@ QEMU で起動するには `./build.sh` に `run` オプションを指定しま
 apps ディレクトリにアプリ群を入れ、フォントなどのリソースをも含めたディスクイメージを作るには APPS_DIR と RESOURCE_DIR 変数を指定します。
 
     $ APPS_DIR=apps RESOURCE_DIR=resource ./build.sh run
+
+## QEMU for Windows
+
+WSL2 上の QEMU では QEMU 上のゲスト OS がマウスを掴んでも、ホストのマウスカーソルが消えないことがあります。この現象を解消する簡単な方法は、Windows ネイティブで動作する QEMU を使うことです。
+
+QEMU for Windows は Stefan Weil さんがビルドしたバイナリが https://qemu.weilnetz.de/ で公開されていますので、それをインストールするのが楽です。
+インストール先は `C:\Program Files\qemu` としてください。
+
+`$HOME/osbook/devenv/run_image.sh` は WSL2 で起動されたときに、`c:\Program Files\qemu\qemu-system-x86_64.exe` が存在すれば、そちらを起動するように修正してあります。
