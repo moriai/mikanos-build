@@ -15,14 +15,14 @@ then
     exit 1
 fi
 
+#QEMU_FOR_WINDOWS="/mnt/c/Program Files/qemu/qemu-system-x86_64.exe"
 QEMU="qemu-system-x86_64"
 OVMF_CODE="$DEVENV_DIR/OVMF_CODE.fd"
 OVMF_VARS="$DEVENV_DIR/OVMF_VARS.fd"
 
-if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-    QEMU_FOR_WIN="/mnt/c/Program Files/qemu/qemu-system-x86_64.exe"
-    if [ -x "$QEMU_FOR_WIN" ]; then
-        QEMU="$QEMU_FOR_WIN"
+if [ -f /proc/sys/fs/binfmt_misc/WSLInterop -a -n "$QEMU_FOR_WINDOWS" ]; then
+    if [ -x "$QEMU_FOR_WINDOWS" ]; then
+        QEMU="$QEMU_FOR_WINDOWS"
         OVMF_CODE="$(wslpath -w $DEVENV_DIR/OVMF_CODE.fd)"
         OVMF_VARS="$(wslpath -w $DEVENV_DIR/OVMF_VARS.fd)"
         DISK_IMG="$(wslpath -w $DISK_IMG)"

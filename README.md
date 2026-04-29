@@ -170,6 +170,6 @@ apps ディレクトリにアプリ群を入れ、フォントなどのリソー
 WSL2 上の QEMU では QEMU 上のゲスト OS がマウスを掴んでも、ホストのマウスカーソルが消えないことがあります。この現象を解消する簡単な方法は、Windows ネイティブで動作する QEMU を使うことです。
 
 QEMU for Windows は Stefan Weil さんがビルドしたバイナリが https://qemu.weilnetz.de/ で公開されていますので、それをインストールするのが楽です。
-インストール先は `C:\Program Files\qemu` としてください。
 
-`$HOME/osbook/devenv/run_image.sh` は WSL2 で起動されたときに、`c:\Program Files\qemu\qemu-system-x86_64.exe` が存在すれば、そちらを起動するように修正してあります。
+`$HOME/osbook/devenv/run_image.sh` は WSL2 上で起動されたときに、環境変数 `QEMU_FOR_WINDOWS` で指定されたファイルが実行可能であれば、そちらを起動するように修正してあります。
+QEMU for Windows 中の `qemu-system-x86_64.exe` の WSL2 からみたパス（例えば、`"/mnt/c/Program Files/qemu/qemu-system-x86_64.exe"`）を `QEMU_FOR_WINDOWS` に設定すると良いでしょう。
