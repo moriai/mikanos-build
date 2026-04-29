@@ -44,3 +44,4 @@ fi
 
 sleep 0.5
 sudo umount $MOUNT_POINT
+rmdir $MOUNT_POINT
