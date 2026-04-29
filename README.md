@@ -1,7 +1,7 @@
 # mikanos-build
 
-このリポジトリは uchan が開発している教育用 OS [MikanOS](https://github.com/uchan-nos/mikanos) をビルドする手順およびツールを収録しています。
-Ubuntu 18.04 で動作を確認しています。
+このリポジトリは uchan が開発している教育用 OS [MikanOS](https://github.com/uchan-nos/mikanos) を[ビルドする手順およびツールを収録しているレポジトリ](https://github.com/uchan-nos/mikanos-build)の個人的なフォークです。
+Ubuntu 22.04 で動作を確認しています。
 
 ここで紹介する手順は Linux のコマンド操作にある程度慣れていることを前提に書かれています。
 Linux のコマンドに不慣れな方は、まず [これだけは知っておきたい Linux コマンド](https://github.com/uchan-nos/os-from-zero/wiki/Basic-Linux-Commands) を読むことをお勧めします。
@@ -19,21 +19,25 @@ MikanOS のビルド手順は大きく次の 4 段階です。
 
 ### リポジトリのダウンロード
 
-まずは Git をインストールして，mikanos-build リポジトリをダウンロードします。
+まずは Git をインストールして，本リポジトリをダウンロードします。
 
     $ sudo apt update
     $ sudo apt install git
     $ cd $HOME
-    $ git clone https://github.com/uchan-nos/mikanos-build.git osbook
+    $ git clone -b osbook2 https://github.com/moriai/mikanos-build.git osbook
 
 mikanos-build 最新版は Ubuntu 22.04 をサポートしています。ただし、導入される lld-14 を使うとリンクアドレスがズレることにより OS やアプリが誤動作することが分かっています。
 - [day03a以降、カーネルの起動まで進まない · Issue #134](https://github.com/uchan-nos/os-from-zero/issues/134)
 - [tviewをLLVM 10でビルドするとページフォルトが発生する · Issue #4](https://github.com/uchan-nos/mikanos/issues/4)
 
+このため、MikanOS 本体についても、[上記の問題を解決したブランチ](https://github.com/moriai/mikanos/tree/osbook2)を作成しています。
+
+<!--
 lld-7 を使いたい場合は Ubuntu 18.04 か 20.04 をお使いください。Ubuntu 18.04 や 20.04 向けには次のコマンドを実行して古い mikanos-build を利用してください。
 
     $ cd osbook
     $ git checkout 8d4882122ec548ef680b6b5a2ae841a0fd4d07a1
+-->
 
 ### 開発ツールの導入
 
@@ -93,7 +97,11 @@ MikanOS や mikanos-build リポジトリ全体のライセンスとは異なり
 
 ## MikanOS のソースコードの入手
 
-Git で入手できます。
+本ツールが前提としているフォーク版は下記で入手できます。
+
+    $ git clone -b osbook2 https://github.com/moriai/mikanos.git
+
+なお、アップストリーム（オリジナル版）は下記で入手できます。
 
     $ git clone https://github.com/uchan-nos/mikanos.git
 
