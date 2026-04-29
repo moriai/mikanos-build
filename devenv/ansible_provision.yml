@@ -31,11 +31,11 @@
       apt: name=qemu-system-gui state=latest install_recommends=no
       when: qemu_gui_result.rc == 0
 
-    - name: clone EDK II repository
-      git:
-        repo: "https://github.com/tianocore/edk2.git"
-        dest: "{{ ansible_env.HOME }}/edk2"
-        version: "edk2-stable202208"
+    - name: download EDK II framework
+      unarchive:
+        src: "https://github.com/moriai/mikanos-build/releases/download/v2.2-alpha2/edk2-stable202208.tar.gz"
+        dest: "{{ ansible_env.HOME }}"
+        remote_src: yes
 
     - name: build EDK II base tools
       make:
